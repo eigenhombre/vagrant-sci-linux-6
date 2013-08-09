@@ -44,6 +44,26 @@ package { 'postgresql': ensure => installed }
 
 package { 'postgresql-server': ensure => installed }
 
+
+# MongoDB
+
+package { 'mongodb': ensure => installed }
+
+package { 'mongodb-devel': ensure => installed }
+
+package { 'mongodb-server': ensure => installed }
+
+service { 'mongod':
+  enable => true,
+  ensure => running,
+  require => Package["mongodb-server"]
+}
+
+# Node.js
+
+package { 'npm': ensure => installed }
+
+
 # Leiningen / Clojure
 
 $user = 'vagrant'
